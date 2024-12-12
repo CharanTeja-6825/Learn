@@ -1,0 +1,89 @@
+
+yii\base\ErrorException: Undefined index: DynamicModel in /var/www/klerp_prod/frontend/modules/studentattendance/controllers/StudentdailyattendanceController.php:293
+Stack trace:
+#0 /var/www/klerp_prod/frontend/modules/studentattendance/controllers/StudentdailyattendanceController.php(293): yii\base\ErrorHandler->handleError(8, 'Undefined index...', '/var/www/klerp_...', 293, Array)
+#1 [internal function]: frontend\modules\studentattendance\controllers\StudentdailyattendanceController->actionCourselist()
+#2 /var/www/klerp_prod/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#3 /var/www/klerp_prod/vendor/yiisoft/yii2/base/Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#4 /var/www/klerp_prod/vendor/yiisoft/yii2/base/Module.php(528): yii\base\Controller->runAction('courselist', Array)
+#5 /var/www/klerp_prod/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction('studentattendan...', Array)
+#6 /var/www/klerp_prod/vendor/yiisoft/yii2/base/Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#7 /var/www/klerp_prod/frontend/web/index.php(23): yii\base\Application->run()
+#8 {main}
+Copied!Copy StacktraceSearch StackoverflowSearch GoogleError
+PHP Notice – yii\base\ErrorException
+Undefined index: DynamicModel
+1. in /var/www/klerp_prod/frontend/modules/studentattendance/controllers/StudentdailyattendanceController.phpat line 293
+284285286287288289290291292293294295296297298299300301302                                'model' => $model,'cmodels'=>$cocsmodels
+        ]);
+ 
+ 
+    }
+ 
+    public function actionCourselist()
+    {
+ 
+        $dmodel=$_POST['DynamicModel'];
+        $attendanceDetails=CustomComponent::getAttendance($dmodel);
+        $attendance=$attendanceDetails['attendance'];
+        $stddetails=$attendanceDetails['stddetails'];
+ 
+            $dataProvider=new ArrayDataProvider(['allModels'=>$attendance,'pagination'=>false]);
+        return $this->render('std_courselist', [
+            'dataProvider' => $dataProvider,'stddetails'=>$stddetails
+ 
+        ]);
+                
+2. in /var/www/klerp_prod/frontend/modules/studentattendance/controllers/StudentdailyattendanceController.php at line 293– yii\base\ErrorHandler::handleError(8, 'Undefined index: DynamicModel', '/var/www/klerp_prod/frontend/mod...', 293, ...)
+287288289290291292293294295296297298299                     
+    }
+ 
+    public function actionCourselist()
+    {
+ 
+        $dmodel=$_POST['DynamicModel'];
+        $attendanceDetails=CustomComponent::getAttendance($dmodel);
+        $attendance=$attendanceDetails['attendance'];
+        $stddetails=$attendanceDetails['stddetails'];
+ 
+            $dataProvider=new ArrayDataProvider(['allModels'=>$attendance,'pagination'=>false]);
+        return $this->render('std_courselist', [
+                
+3. frontend\modules\studentattendance\controllers\StudentdailyattendanceController::actionCourselist()
+4. in /var/www/klerp_prod/vendor/yiisoft/yii2/base/InlineAction.php at line 57– call_user_func_array([frontend\modules\studentattendance\controllers\StudentdailyattendanceController, 'actionCourselist'], [])
+5. in /var/www/klerp_prod/vendor/yiisoft/yii2/base/Controller.php at line 157– yii\base\InlineAction::runWithParams(['r' => 'studentattendance/studentdailyat...'])
+6. in /var/www/klerp_prod/vendor/yiisoft/yii2/base/Module.php at line 528– yii\base\Controller::runAction('courselist', ['r' => 'studentattendance/studentdailyat...'])
+7. in /var/www/klerp_prod/vendor/yiisoft/yii2/web/Application.php at line 103– yii\base\Module::runAction('studentattendance/studentdailyat...', ['r' => 'studentattendance/studentdailyat...'])
+8. in /var/www/klerp_prod/vendor/yiisoft/yii2/base/Application.php at line 386– yii\web\Application::handleRequest(yii\web\Request)
+9. in /var/www/klerp_prod/frontend/web/index.php at line 23– yii\base\Application::run()
+17181920212223                        $config['bootstrap'][] = 'gii';
+    $config['modules']['gii'] = [
+        'class' => 'yii\gii\Module',
+    ];
+}*/
+ 
+(new yii\web\Application($config))->run();
+                
+$_GET = [
+    'r' => 'studentattendance/studentdailyattendance/courselist',
+];
+
+$_COOKIE = [
+    'PHPSESSID' => '5c5gbrbqgltjm5hggl24fvq4a2',
+    '_csrf' => '58ebe9e5566f676e962fc48349d36cbbe16d3e3234ee93679d50114e65d7d70aa:2:{i:0;s:5:"_csrf";i:1;s:32:"9sHYGE2QB7WdXOanryuwWjqPJn2GoG-w";}',
+];
+
+$_SESSION = [
+    '__flash' => [],
+    '__returnUrl' => '/index.php?r=studentattendance%2Fstudentdailyattendance%2Fcourselist',
+    '__captcha/site/captcha' => 'jiromas',
+    '__captcha/site/captchacount' => 1,
+    'unid' => 'NA',
+    '__id' => 69668,
+];
+Yii Framework
+2024-11-17, 11:19:31
+
+Apache
+
+Yii Framework/2.0.16
